@@ -1,84 +1,27 @@
-NES.icons is an **NES-style (8bit-like)** icon library.
+# NES.icons (fnick851 fork)
 
-[![Gitter][gitter-badge]][gitter] [![Commitizen friendly][commitizen-badge]][commitizen]
+Hand-drawn 16×16 pixel-art icon SVGs, forked from [nostalgic-css/NES.icons](https://github.com/nostalgic-css/NES.icons) (MIT). Upstream has been frozen at v3.0.0-beta.4 since 2020; this fork keeps the icon sources alive and drops the rest.
 
-### Demo
+What upstream shipped was an icon *webfont* plus its build toolchain. Icon fonts are a legacy practice and that 2020 toolchain no longer runs, so this fork deleted it (recoverable from git history). What remains has **zero dependencies**:
 
-[nes.icons demo](https://codepen.io/trezy/pen/qBONKqa)
-
-## Installation
-
-### Styles
-
-NES.icons is available via either npm, Yarn, or CDN.
-
-#### via package manager
-
-```shell
-npm install nes.icons
-# or
-yarn add nes.icons
-```
-
-Our `package.json` contains some additional metadata under the following keys:
-* `sass` - path to our main Sass source file
-* `style` - path to our non-minified CSS
-
-#### via CDN
-
-Import the CSS via a `<link />` element:
-
-```html
-<!-- latest -->
-<link href="https://unpkg.com/nes.icons@latest/css/nes-icons.min.css" rel="stylesheet" />
-<!-- specific version -->
-<link href="https://unpkg.com/nes.icons@<VERSION>/css/nes-icons.min.css" rel="stylesheet" />
-```
+- `icons/` — 53 icon SVGs, each a 16×16 grid of 1×1 `<rect>` pixels, plus `.aseprite` working files for some
+- `icons.json` — category and alias index (kept in sync with the files)
+- `scripts/svg-to-path.py` — converts an icon into one compact `<path>` d-string for inlining in HTML
+- `scripts/check.py` — repo invariants: index ↔ files in sync, every SVG in the exact grid format the converter assumes
 
 ## Usage
 
-NES.css only provides components. You will need to define your own layout.
-
-The recommended font for NES.css is [Press Start 2P](https://fonts.google.com/specimen/Press+Start+2P). However, [Press Start 2P](https://fonts.google.com/specimen/Press+Start+2P) only supports English characters. When you're using this framework with any language other than English, please use another font. Follow the Google Fonts instructions about how to include them, or simply include it as below:
-
-```html
-<head>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-</head>
+```
+$ python3 scripts/svg-to-path.py icons/trophy.svg
+M2 0h11v1H2zM2 1h1v1H2z…
 ```
 
-Then use any of the icons in your project!
-
+Wrap the output like:
 
 ```html
-<i class="nes-icon eye"></i>
-<i class="nes-icon eye-slash"></i>
-<i class="nes-icon discord"></i>
+<svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
+  <path d="…" />
+</svg>
 ```
 
-## Browser Support
-
-    NES.css is compatible with the newest version of the following browsers:
-* Chrome
-* Firefox
-* Safari
-* Edge
-
-Untested
-* IE
-
-## Copyright and license
-
-Code and documentation copyright 2019 [Trezy.com][trezy.com]. Code released under the MIT License. Docs released under Creative Commons.
-
-
-
-
-
-
-[commitizen]: http://commitizen.github.io/cz-cli/
-[commitizen-badge]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
-[contributing-document]: CONTRIBUTING.md
-[gitter]: https://gitter.im/nostalgic-css/Lobby
-[gitter-badge]: https://img.shields.io/gitter/room/nostalgic-css/Lobby.svg
-[trezy.com]: https://trezy.com
+After changing anything, run `python3 scripts/check.py`.

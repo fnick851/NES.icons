@@ -4,7 +4,6 @@
       "stop"
     ]
   },
-
   "iconsByCategory": {
     "Alert": [
       "exclamation",
@@ -72,13 +71,13 @@
     ],
     "Shapes": [
       "cloud",
-      "square"
+      "square",
+      "star"
     ],
     "Social": [
       "comment",
       "envelope",
       "heart",
-      "social",
       "thumbs-up",
       "user",
       "users"

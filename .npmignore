@@ -1,7 +1,0 @@
-.circleci/
-templates/
-.gitignore
-.npmignore
-.stylelintrc
-package-lock.json
-README.md
